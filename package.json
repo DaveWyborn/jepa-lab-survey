@@ -1,0 +1,16 @@
+{
+  "name": "jepa-experiment-002-survey",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "vercel dev",
+    "test": "node --check public/app.js && node --test tests/vercel-api.test.mjs"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "1.1.0"
+  }
+}

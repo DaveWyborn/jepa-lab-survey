@@ -1,0 +1,10 @@
+.env
+.env.*
+!.env.example
+.vercel/
+node_modules/
+data/
+__pycache__/
+*.pyc
+*.log
+public/stimuli/placeholder-screenshot.png

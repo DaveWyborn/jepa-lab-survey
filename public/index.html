@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>JEPA Experiment 002</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section class="page form-page" id="participant-page" aria-labelledby="participant-heading">
+        <h1 id="participant-heading" tabindex="-1">Participant questions</h1>
+
+        <form id="participant-form">
+          <fieldset>
+            <legend>Age</legend>
+            <div class="options">
+              <label><input type="radio" name="age_band" value="Under 18" required> Under 18</label>
+              <label><input type="radio" name="age_band" value="18-24"> 18–24</label>
+              <label><input type="radio" name="age_band" value="25-34"> 25–34</label>
+              <label><input type="radio" name="age_band" value="35-44"> 35–44</label>
+              <label><input type="radio" name="age_band" value="45-54"> 45–54</label>
+              <label><input type="radio" name="age_band" value="55-64"> 55–64</label>
+              <label><input type="radio" name="age_band" value="65+"> 65+</label>
+              <label><input type="radio" name="age_band" value="Prefer not to say"> Prefer not to say</label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Do you have a visual impairment that may affect how you view websites?</legend>
+            <div class="options">
+              <label><input type="radio" name="visual_impairment" value="No" required> No</label>
+              <label><input type="radio" name="visual_impairment" value="Colour blindness / colour vision deficiency"> Colour blindness / colour vision deficiency</label>
+              <label><input type="radio" name="visual_impairment" value="Other visual impairment"> Other visual impairment</label>
+              <label><input type="radio" name="visual_impairment" value="Prefer not to say"> Prefer not to say</label>
+            </div>
+
+            <div id="impairment-description-group" hidden>
+              <label for="impairment-description">Optional short description</label>
+              <input id="impairment-description" name="visual_impairment_description" type="text" maxlength="200" autocomplete="off">
+            </div>
+          </fieldset>
+
+          <button type="submit" disabled>Continue</button>
+          <p class="status" id="participant-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="page stimulus-page" id="stimulus-page" aria-labelledby="stimulus-heading" hidden>
+        <h1 id="stimulus-heading" class="visually-hidden" tabindex="-1">Website stimulus</h1>
+
+        <div class="timed-stage countdown-stage" id="countdown-stage" aria-live="polite" aria-atomic="true" hidden>
+          <span id="countdown-number"></span>
+        </div>
+
+        <div class="timed-stage screenshot-stage" id="screenshot-stage" hidden>
+          <img id="stimulus-image" alt="Website screenshot stimulus" draggable="false">
+        </div>
+
+        <div class="timed-stage response-stage" id="response-stage" hidden>
+          <h2 id="response-question" tabindex="-1">Based only on what you just saw, would you continue exploring this website?</h2>
+          <div class="answer-buttons" role="group" aria-labelledby="response-question">
+            <button type="button" data-response="Yes">Yes</button>
+            <button type="button" data-response="No">No</button>
+          </div>
+          <p class="status" id="response-status" role="status" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <section class="page form-page" id="thanks-page" aria-labelledby="thanks-heading" hidden>
+        <h1 id="thanks-heading" tabindex="-1">Thank you for taking part.</h1>
+
+        <form id="feedback-form">
+          <label for="pilot-feedback">Was anything unclear, confusing, or difficult while completing this survey?</label>
+          <textarea id="pilot-feedback" name="pilot_feedback" rows="5" maxlength="2000"></textarea>
+          <p class="optional">Optional</p>
+          <button type="submit">Finish</button>
+          <p class="status" id="feedback-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

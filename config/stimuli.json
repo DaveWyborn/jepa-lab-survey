@@ -1,0 +1,9 @@
+{
+  "stimuli": [
+    {
+      "stimulus_id": "placeholder-001",
+      "desktop_image": "placeholder-desktop.png",
+      "mobile_image": "placeholder-mobile.png"
+    }
+  ]
+}
