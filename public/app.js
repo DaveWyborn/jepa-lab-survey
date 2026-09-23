@@ -4,6 +4,7 @@ const pages = {
   participant: document.querySelector("#participant-page"),
   stimulus: document.querySelector("#stimulus-page"),
   thanks: document.querySelector("#thanks-page"),
+  completion: document.querySelector("#completion-page"),
 };
 
 const participantForm = document.querySelector("#participant-form");
@@ -101,7 +102,7 @@ function preloadImage(source) {
         if (typeof image.decode === "function") {
           await image.decode();
         }
-        resolve();
+        resolve({ width: image.naturalWidth, height: image.naturalHeight });
       } catch (_error) {
         reject(new Error("The screenshot could not be prepared. Please try again later."));
       }
@@ -148,8 +149,8 @@ async function prepareStimulus(index) {
   const stimulus = stimuli[index];
   const stimulusVariant = selectStimulusVariant();
   const imageSource = stimulus[`${stimulusVariant}_image`];
-  await preloadImage(imageSource);
-  return { stimulus, stimulusVariant, imageSource };
+  const imageSize = await preloadImage(imageSource);
+  return { stimulus, stimulusVariant, imageSource, imageSize };
 }
 
 function preloadNextStimulus() {
@@ -166,6 +167,8 @@ function preloadNextStimulus() {
 async function presentStimulus(prepared) {
   currentPresentation = null;
   await ensureDisplayImageReady(prepared.imageSource);
+  const aspectRatio = prepared.imageSize.width / prepared.imageSize.height;
+  document.documentElement.style.setProperty("--stimulus-aspect-ratio", String(aspectRatio));
 
   countdownNumber.textContent = "3";
   showStimulusStage(countdownStage);
@@ -311,9 +314,7 @@ feedbackForm.addEventListener("submit", async (event) => {
       pilot_feedback: document.querySelector("#pilot-feedback").value,
       total_completion_time_seconds: (Date.now() - startedAt) / 1000,
     });
-    document.querySelector("#pilot-feedback").disabled = true;
-    button.hidden = true;
-    setStatus("feedback-status", "Your response has been recorded.");
+    showPage("completion");
   } catch (error) {
     setStatus("feedback-status", error.message, true);
     button.disabled = false;

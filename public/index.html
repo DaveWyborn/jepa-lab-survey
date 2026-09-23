@@ -51,11 +51,21 @@
         <h1 id="stimulus-heading" class="visually-hidden" tabindex="-1">Website stimulus</h1>
 
         <div class="timed-stage countdown-stage" id="countdown-stage" aria-live="polite" aria-atomic="true" hidden>
-          <span id="countdown-number"></span>
+          <div class="presentation-layout">
+            <p class="countdown-label">Image loading in:</p>
+            <div class="stimulus-frame countdown-frame">
+              <span id="countdown-number"></span>
+            </div>
+          </div>
         </div>
 
         <div class="timed-stage screenshot-stage" id="screenshot-stage" hidden>
-          <img id="stimulus-image" alt="Website screenshot stimulus" draggable="false">
+          <div class="presentation-layout">
+            <p class="countdown-label presentation-spacer" aria-hidden="true">Image loading in:</p>
+            <div class="stimulus-frame screenshot-frame">
+              <img id="stimulus-image" alt="Website screenshot stimulus" draggable="false">
+            </div>
+          </div>
         </div>
 
         <div class="timed-stage response-stage" id="response-stage" hidden>
@@ -78,6 +88,10 @@
           <button type="submit">Finish</button>
           <p class="status" id="feedback-status" role="status" aria-live="polite"></p>
         </form>
+      </section>
+
+      <section class="page form-page" id="completion-page" aria-labelledby="completion-heading" hidden>
+        <h1 id="completion-heading" tabindex="-1">Thank you for completing the survey.</h1>
       </section>
     </main>
   </body>

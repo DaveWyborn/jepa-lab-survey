@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 import { HttpError } from "../api/_lib/http.js";
@@ -77,4 +78,15 @@ test("loads every Vercel route module", async () => {
   assert.equal(typeof sessionRoute.POST, "function");
   assert.equal(typeof responseRoute.POST, "function");
   assert.equal(typeof completeRoute.POST, "function");
+});
+
+test("includes the countdown positioning box and final completion screen", async () => {
+  const html = await readFile(new URL("../public/index.html", import.meta.url), "utf8");
+  const script = await readFile(new URL("../public/app.js", import.meta.url), "utf8");
+
+  assert.match(html, /Image loading in:/);
+  assert.match(html, /class="stimulus-frame countdown-frame"/);
+  assert.match(html, /id="completion-page"/);
+  assert.match(html, /Thank you for completing the survey\./);
+  assert.match(script, /showPage\("completion"\)/);
 });
